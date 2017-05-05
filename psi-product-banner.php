@@ -10,42 +10,21 @@ Domain Path: ?
 Version: 0.0.1
 */
 
-define('psiPB_version', '0.0.1');
+// admin.php file contents
 
-define('psiPB_REQUIRED_WP_VERSION', '4.2');
+add_action('admin_init', 'psi_product_banner_admin_init');
 
-define('psiPB_PLUGIN',__FILE__);
-
-define('psiPB_PLUGIN_BASENAME', plugin_basename(psiPB_PLUGIN));
-
-define('psiPB_PLUGIN_NAME', trim( dirname(psiPB_PLUGIN_BASENAME)));
-
-define('psiPB_PLUGIN_DIR', untrailingslashit( dirname(psiPB_PLUGIN)));
-
-define('psiPB_PLUGIN_MODULES_DIR', psiPB_PLUGIN_DIR . '/modules');
-
-if (!defined('psiPB_LOAD_JS')){
-    define('psiPB_LOAD_JS', true);
+function psi_product_banner_admin_init() {
+    do_action('psi_product_banner_admin_init');
 }
 
-if (!defined('psiPB_LOAD_CSS')) {
-    define('psiPB_LOAD_CSS', true);
+add_action('admin_menu', 'psi_product_banner_admin_menu', 9);
+
+function psi_product_banner_admin_menu() {
+    add_menu_page(__('PSI Product Banner', 'psi-product-banner'),
+                  __('PSI Product Banner','psi-product-banner'),
+                  '',''
+                  '','dashicons-format-image');
+
+    $edit = add_submenu_page('')
 }
-
-// if (!defined('psiPB_USE_PIPE')) {
-//     define('psiPB_USE_PIPE', true);
-// }
-
-if (!defined('psiPB_ADMIN_READ_CAPABILITY')) {
-    define('psiPB_ADMIN_READ_CAPABILITY', 'edit_posts');
-}
-
-if (!defined('psiPB_ADMIN_READ_WRITE_CAPABILITY')) {
-    define('psiPB_ADMIN_READ_WRITE_CAPABILITY','publish_pages');
-}
-
-if (!defined('psiPB_VERIFY_NONCE')) {
-    define('psiPB_VERIFY_NONCE', true);
-}
-
-require_once psiPB_PLUGIN_DIR . '/settings.php';
